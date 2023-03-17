@@ -12,11 +12,11 @@ on:
 jobs:
   test-targets-workflow:
     runs-on: ubuntu-latest
-    container: rocker/tidyverse:4.2.0
+    container: rocker/tidyverse:4.2.2
     env:
       GIT_CRYPT_KEY64: ${{ secrets.GIT_CRYPT_KEY64 }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       
       - name: Install system dependencies
         run: |
@@ -25,11 +25,11 @@ jobs:
           
       - name: Trust git repo
         run: |
-          git config --global --add safe.directory /__w/sc-targets-template/sc-targets-template
+          git config --global --add safe.directory /__w/opensci-evaluation/opensci-evaluation
           
       - name: Install packages from renv.lock (with cache)
         if: ${{ !env.ACT }}  
-        uses: r-lib/actions/setup-renv@master
+        uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 2
 
