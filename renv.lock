@@ -307,6 +307,49 @@
       ],
       "Hash": "7c89603d81793f0d5486d91ab1fc6f1d"
     },
+    "furrr": {
+      "Package": "furrr",
+      "Version": "0.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "future",
+        "globals",
+        "lifecycle",
+        "purrr",
+        "rlang",
+        "vctrs"
+      ],
+      "Hash": "da7a4c32196cb2262a41dd5a25d486ff"
+    },
+    "future": {
+      "Package": "future",
+      "Version": "1.32.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "digest",
+        "globals",
+        "listenv",
+        "parallel",
+        "parallelly",
+        "utils"
+      ],
+      "Hash": "c68517cf2f78be4ea86e140b8598a4ca"
+    },
+    "future.callr": {
+      "Package": "future.callr",
+      "Version": "0.8.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "callr",
+        "future"
+      ],
+      "Hash": "e76426c4a99a1798a9376c6fe9070a68"
+    },
     "generics": {
       "Package": "generics",
       "Version": "0.1.2",
@@ -366,6 +409,17 @@
         "R"
       ],
       "Hash": "ab08ac61f3e1be454ae21911eb8bc2fe"
+    },
+    "globals": {
+      "Package": "globals",
+      "Version": "0.16.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "codetools"
+      ],
+      "Hash": "baa9585ab4ce47a9f4618e671778cc6f"
     },
     "glue": {
       "Package": "glue",
@@ -598,6 +652,16 @@
       ],
       "Hash": "a6b6d352e3ed897373ab19d8395c98d0"
     },
+    "listenv": {
+      "Package": "listenv",
+      "Version": "0.9.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "4fbd3679ec8ee169ba28d4b1ea7d0e8f"
+    },
     "magrittr": {
       "Package": "magrittr",
       "Version": "2.0.3",
@@ -686,6 +750,18 @@
         "zip"
       ],
       "Hash": "fc5e0e85d3a1e4282f04f303627b7e72"
+    },
+    "parallelly": {
+      "Package": "parallelly",
+      "Version": "1.34.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "parallel",
+        "tools",
+        "utils"
+      ],
+      "Hash": "2a795ec0ddbfe465ca0d6471039631bf"
     },
     "pillar": {
       "Package": "pillar",
@@ -943,7 +1019,7 @@
     },
     "tarchetypes": {
       "Package": "tarchetypes",
-      "Version": "0.6.0",
+      "Version": "0.7.5",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -951,6 +1027,9 @@
         "digest",
         "dplyr",
         "fs",
+        "furrr",
+        "future",
+        "future.callr",
         "rlang",
         "targets",
         "tibble",
@@ -959,11 +1038,11 @@
         "vctrs",
         "withr"
       ],
-      "Hash": "4d76a20b57bc46b0be7ef6ca3cb68e2f"
+      "Hash": "b059a3d39cececb65eceffc0b33c1061"
     },
     "targets": {
       "Package": "targets",
-      "Version": "0.12.0",
+      "Version": "0.14.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -987,7 +1066,7 @@
         "withr",
         "yaml"
       ],
-      "Hash": "197fd95f9f9c6ac7e0be2d0ffbdd932f"
+      "Hash": "bf748746ce81f412fb06d30d6a2ddec7"
     },
     "tibble": {
       "Package": "tibble",

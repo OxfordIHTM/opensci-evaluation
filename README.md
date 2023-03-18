@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Open Science and Reproducible Research in R <img src="https://raw.githubusercontent.com/OxfordIHTM/open-reproducible-science/main/images/oxford_codehub.png" width="200px" align="right" />
+# Continuous Evaluation of the Oxford IHTM Open Science and Reproducible Research in R Lecture Series<img src="https://raw.githubusercontent.com/OxfordIHTM/open-reproducible-science/main/images/oxford_codehub.png" width="200px" align="right" />
 
 <!-- badges: start -->
 <!-- badges: end -->
