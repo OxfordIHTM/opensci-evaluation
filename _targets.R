@@ -39,7 +39,7 @@ data_targets <- tar_plan(
   ihtm_commits = get_commits(
     owner = "OxfordIHTM", 
     repo = ihtm_branches$repository, 
-    branch = ihtm_branches$name
+    branch = unlist(ihtm_branches$name)
   ),
   ## Get pull requests
   ihtm_pulls = get_pulls(
@@ -64,7 +64,44 @@ data_targets <- tar_plan(
 
 ### Processing targets
 processing_targets <- tar_plan(
-  
+  ihtm_commits_per_day = calculate_commits_per_day(
+    ihtm_commits |>
+      dplyr::filter(
+        !author.login %in% c("ernestguevarra", "github-classroom[bot]")
+      )
+  ),
+  ihtm_commits_per_week = calculate_commits_per_week(
+    ihtm_commits |>
+      dplyr::filter(
+        !author.login %in% c("ernestguevarra", "github-classroom[bot]")
+      )
+  ),
+  ihtm_commits_per_author = calculate_commits_per_author(
+    ihtm_commits |>
+      dplyr::filter(
+        !author.login %in% c("ernestguevarra", "github-classroom[bot]")
+      )
+  ),
+  ihtm_commits_per_author_per_day = calculate_commits_per_author_per_day(
+    ihtm_commits |>
+      dplyr::filter(
+        !author.login %in% c("ernestguevarra", "github-classroom[bot]")
+      )
+  ),
+  ihtm_commits_per_author_per_week = calculate_commits_per_author_per_week(
+    ihtm_commits |>
+      dplyr::filter(
+        !author.login %in% c("ernestguevarra", "github-classroom[bot]")
+      )
+  ),
+  ihtm_commits_by_pulls = create_commits_by_pulls(
+    commits = ihtm_commits,
+    pulls = ihtm_pulls,
+    pulls_commits = ihtm_pull_commits
+  ) |>
+    dplyr::filter(
+      !commit_username %in% c("ernestguevarra", "github-classroom[bot]")
+    )
 )
 
 

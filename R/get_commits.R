@@ -92,7 +92,12 @@ get_pull_commit <- function(owner, repo, commit, .limit = Inf) {
   ) |>
     jsonlite::toJSON() |>
     jsonlite::fromJSON(flatten = TRUE) |>
-    tibble::tibble()
+    tibble::tibble() |>
+    dplyr::mutate(
+      owner = owner,
+      repository = repo,
+      sha = commit
+    )
 }
 
 
