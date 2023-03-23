@@ -1,4 +1,16 @@
+################################################################################
+#
+#'
+#' Get pull requests
+#'
+#' @param owner 
+#' @param repo 
+#' @param .limit
 
+
+#'
+#
+################################################################################
 
 
 
@@ -22,7 +34,7 @@ get_pulls <- function(owner, repo, .limit = Inf) {
   
   if (length(owner) < length(repo)) {
     stop(
-      "Lenth of owner should either be 1 or same as length of repo. Try again.",
+      "Length of owner should either be 1 or same as length of repo. Try again.",
       call. = TRUE
     )
   }
