@@ -235,15 +235,6 @@ report_targets <- tar_plan(
       input = rrr_evaluation_report_html_2023[1],
       output = "outputs/rrr_evaluation_2023.pdf"
     )
-  ),
-  tar_target(
-    name = rrr_feedback_2024_slides,
-    command = rmarkdown::render(
-      input = "slides/class_naruto_feedback.Rmd",
-      output_dir = "docs",
-      knit_root_dir = here::here()
-    ),
-    cue = tar_cue("always")
   )
 )
 
