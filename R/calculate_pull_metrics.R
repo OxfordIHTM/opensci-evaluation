@@ -42,8 +42,8 @@ create_commits_by_pulls <- function(class_list,
     dplyr::group_by(commit_author) |>
     tidyr::fill(commit_username, .direction = "up")
   
-  commitsDF <- dplyr::full_join(
-    x = classDF[ , c("login", "id")], 
+  commitsDF <- dplyr::left_join(
+    x = classDF[ , c("ihtm_class", "login", "id")], 
     y = commitsDF, 
     by = c("login" = "commit_username"),
     multiple = "all"
