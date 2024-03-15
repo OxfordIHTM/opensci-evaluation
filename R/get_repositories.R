@@ -1,10 +1,18 @@
-################################################################################
-#
 #'
 #' Get GitHub repositories
+#' 
+#' @param org A character value or vector of character values for name of 
+#'   GitHub organisation from which to retrieve repository/ies information from.
+#' @param .limit Number of results to return. Default to `Inf`.
+#' 
+#' @returns A tibble with rows for information for each repository within the
+#'   specified organisation.
+#' 
+#' @examples
+#' get_repositories("OxfordIHTM")
+#' 
+#' @export
 #'
-#
-################################################################################
 
 get_repositories_ <- function(org, .limit = Inf) {
   gh::gh(
@@ -14,6 +22,9 @@ get_repositories_ <- function(org, .limit = Inf) {
   ) |>
     jsonlite::toJSON() |>
     jsonlite::fromJSON(flatten = TRUE) |>
+    lapply(unlist) |>
+    (\(x) do.call(cbind, x))() |>
+    data.frame() |>
     tibble::tibble()
 }
 
