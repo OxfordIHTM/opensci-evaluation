@@ -49,7 +49,7 @@ data_targets <- tar_plan(
         dplyr::filter(
           stringr::str_detect(
             name, 
-            "working-with-data-in-r-|basic-operations-in-ir-|bmi-strikes-back-|return-of-the-bmi-"
+            "working-with-data-in-r-|basic-operations-in-r-|bmi-strikes-back-|return-of-the-bmi-"
           )
         ) |> 
         dplyr::pull(name)
@@ -102,10 +102,16 @@ data_targets <- tar_plan(
       commit = ihtm_commits_all$sha
     )
   ),
-  ihtm_pull_commits = get_pull_commits(
-    owner = "OxfordIHTM",
-    repo = ihtm_commits$repository,
-    commit = ihtm_commits$sha
+  ihtm_commits_repository = ihtm_commits$repository,
+  ihtm_commits_sha = ihtm_commits$sha,
+  tar_target(
+    name = ihtm_pull_commits,
+    command = get_pull_commits(
+      owner = "OxfordIHTM",
+      repo = ihtm_commits_repository,
+      commit = ihtm_commits_sha
+    ),
+    pattern = map(ihtm_commits_repository, ihtm_commits_sha)
   ),
   ### Get reviews
   ihtm_reviews = get_reviews(
@@ -118,7 +124,7 @@ data_targets <- tar_plan(
         dplyr::filter(
           stringr::str_detect(
             name, 
-            "working-with-data-in-r-|basic-operations-in-ir-|bmi-strikes-back-|return-of-the-bmi-"
+            "working-with-data-in-r-|basic-operations-in-r-|bmi-strikes-back-|return-of-the-bmi-"
           )
         ) |> 
         dplyr::pull(name)
