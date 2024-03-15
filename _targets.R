@@ -39,20 +39,23 @@ data_targets <- tar_plan(
       repo = ihtm_repositories$name
     )
   ),
-  ihtm_branches = get_repos_branches(
-    owner = "OxfordIHTM", 
-    repo = c(
-      "ihtm-hackathon-2023", 
-      "ihtm-hackathon-2024",
-      "rstats-exercises",
-      ihtm_repositories |> 
-        dplyr::filter(
-          stringr::str_detect(
-            name, 
-            "working-with-data-in-r-|basic-operations-in-ir-|bmi-strikes-back-|return-of-the-bmi-"
-          )
-        ) |> 
-        dplyr::pull(name)
+  tar_target(
+    name = ihtm_branches,
+    command = get_repos_branches(
+      owner = "OxfordIHTM", 
+      repo = c(
+        "ihtm-hackathon-2023", 
+        "ihtm-hackathon-2024",
+        "rstats-exercises",
+        ihtm_repositories |> 
+          dplyr::filter(
+            stringr::str_detect(
+              name, 
+              "working-with-data-in-r-|basic-operations-in-r-|bmi-strikes-back-|return-of-the-bmi-"
+            )
+          ) |> 
+          dplyr::pull(name)
+      )
     )
   ),
   ### Get repository commits per branch ----
@@ -64,10 +67,13 @@ data_targets <- tar_plan(
       branch = unlist(ihtm_branches_all$name)
     )
   ),
-  ihtm_commits = get_commits(
-    owner = "OxfordIHTM", 
-    repo = ihtm_branches$repository, 
-    branch = unlist(ihtm_branches$name)
+  tar_target(
+    name = ihtm_commits,
+    command = get_commits(
+      owner = "OxfordIHTM", 
+      repo = ihtm_branches$repository, 
+      branch = ihtm_branches$name
+    )
   ),
   ### Get pull requests ----
   tar_target(
@@ -102,10 +108,16 @@ data_targets <- tar_plan(
       commit = ihtm_commits_all$sha
     )
   ),
-  ihtm_pull_commits = get_pull_commits(
-    owner = "OxfordIHTM",
-    repo = ihtm_commits$repository,
-    commit = ihtm_commits$sha
+  ihtm_commits_repository = ihtm_commits$repository,
+  ihtm_commits_sha = ihtm_commits$sha,
+  tar_target(
+    name = ihtm_pull_commits,
+    command = get_pull_commits(
+      owner = "OxfordIHTM",
+      repo = ihtm_commits_repository,
+      commit = ihtm_commits_sha
+    ),
+    pattern = map(ihtm_commits_repository, ihtm_commits_sha)
   ),
   ### Get reviews
   ihtm_reviews = get_reviews(
@@ -118,7 +130,7 @@ data_targets <- tar_plan(
         dplyr::filter(
           stringr::str_detect(
             name, 
-            "working-with-data-in-r-|basic-operations-in-ir-|bmi-strikes-back-|return-of-the-bmi-"
+            "working-with-data-in-r-|basic-operations-in-r-|bmi-strikes-back-|return-of-the-bmi-"
           )
         ) |> 
         dplyr::pull(name)
@@ -235,15 +247,6 @@ report_targets <- tar_plan(
       input = rrr_evaluation_report_html_2023[1],
       output = "outputs/rrr_evaluation_2023.pdf"
     )
-  ),
-  tar_target(
-    name = rrr_feedback_2024_slides,
-    command = rmarkdown::render(
-      input = "slides/class_naruto_feedback.Rmd",
-      output_dir = "docs",
-      knit_root_dir = here::here()
-    ),
-    cue = tar_cue("always")
   )
 )
 

@@ -42,11 +42,7 @@ jobs:
         
       - name: Run workflow
         run: |
-          targets::tar_make(dplyr::starts_with("ihtm"))
+          targets::tar_make(ihtm_commits)
         shell: Rscript {0}
-        
-      - name: Deploy report
-        run: |
-          targets::tar_make(rrr_evaluation_report_html_2023)
-        shell: Rscript {0}
+
         

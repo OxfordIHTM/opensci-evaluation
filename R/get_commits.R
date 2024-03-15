@@ -1,5 +1,3 @@
-################################################################################
-#
 #'
 #' Get all commits information from a GitHub repository
 #' 
@@ -9,14 +7,14 @@
 #' @param .limit Number of records to return. Set to retrieve all records by
 #'   default.
 #' 
-#' @return A data.frame with information on a number of commits made to 
+#' @returns A data.frame with information on a number of commits made to 
 #'   specified GitHub repository
 #'   
 #' @examples 
 #' get_repo_commits(owner = "OxfordIHM", repo = "ihtm-hackathon-2023")
+#' 
+#' @export
 #'
-#
-################################################################################
 
 get_commits_ <- function(owner, 
                          repo, 
@@ -31,6 +29,9 @@ get_commits_ <- function(owner,
   ) |>
     jsonlite::toJSON() |>
     jsonlite::fromJSON(flatten = TRUE) |>
+    lapply(unlist) |>
+    (\(x) do.call(cbind, x))() |>
+    data.frame() |>
     tibble::tibble() |>
     dplyr::mutate(
       owner = owner,
